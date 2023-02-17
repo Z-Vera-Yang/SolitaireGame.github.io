@@ -1,6 +1,5 @@
 package solitaire.card;
 
-public enum SUIT {
-
+public enum Suit {
 	CLUBS, DIAMONDS, SPADES, HEARTS
 }
