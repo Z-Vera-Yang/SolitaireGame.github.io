@@ -13,8 +13,7 @@ public class Deck {
 			for(Rank rank: Rank.values()) {
 				cards.push(Card.getCard(rank, suit));
 			}
-		}
-		Collections.shuffle(cards);
+		}		
 	}
 	
 	public boolean isEmpty() {
@@ -24,5 +23,9 @@ public class Deck {
 	public Card draw() {
 		assert !isEmpty();
 		return this.cards.pop();
+	}
+
+	public void shuffle() {
+		Collections.shuffle(cards);		
 	}
 }

@@ -1,7 +1,6 @@
 package solitaire.gui;
 
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -26,11 +25,11 @@ public class DeckView extends HBox implements GameModelListener{
 	
 	public DeckView() {
 		GameModel.getInstance().reset();
-		Button button = new Button();
+		final Button button = new Button();
 		button.setGraphic(new ImageView(CardImages.getBack()));
 		button.setStyle(BUTTON_STYLE_NORMAL);
 		
-		button.setOnMousePressed((EventHandler<? super MouseEvent>) new EventHandler<MouseEvent>() {
+		button.setOnMousePressed(new EventHandler<MouseEvent>() {
 			
 			@Override
 			public void handle(MouseEvent event) {
@@ -47,7 +46,7 @@ public class DeckView extends HBox implements GameModelListener{
 				if(!GameModel.getInstance().canDraw(CardDeck.DECK)) {
 					GameModel.getInstance().reset();
 				}else {
-					GameModel.getInstance().getDeckMove().move();
+					GameModel.getInstance().getDiscardMove().move();
 				}	
 			}			
 		});	
