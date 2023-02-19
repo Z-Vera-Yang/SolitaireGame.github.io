@@ -6,18 +6,24 @@ import java.util.Stack;
 
 import solitaire.card.Card;
 import solitaire.card.Deck;
-import solitaire.move.DeckMove;
+import solitaire.model.WorkingStackManager.Workingstack;
+import solitaire.move.DiscardMove;
 import solitaire.move.Move;
 
 public class GameModel {
 	
 	private static final GameModel INSTANCE = new GameModel();
 	private Deck deck = new Deck();
-	private Stack<Card> waste;
+	private Stack<Card> discard;
 	private List<GameModelListener> listenerList = new ArrayList<>();
+	private WorkingStackManager workingStackManager;
 	
 	public enum CardDeck implements Location{
 		DECK, DISCARD
+	}
+	
+	public GameModel() {
+		
 	}
 	
 	public static GameModel getInstance() {
@@ -32,48 +38,55 @@ public class GameModel {
 		for(GameModelListener listener : listenerList) {
 			listener.gameStateChanged();
 		}
-	}
-	
-	public Move getDeckMove() {
-		return new DeckMove(getInstance());
-	}
+	}		
 	
 	public void reset() {
 		deck.reset();
-		waste = new Stack<Card>();
+		deck.shuffle();
+		discard = new Stack<Card>();
+		workingStackManager = new WorkingStackManager(deck);
 		notifyListener();
 	}
 
 	public boolean discard() {
 		if(!this.deck.isEmpty()) {
-			waste.add(deck.draw());
+			discard.add(deck.draw());
 			notifyListener();
 			return true;
 		}
 		return false;
 	}
 
-	public Card peekWaste() {
-		if(waste.isEmpty()) {
+	public Card peekDiscard() {
+		if(discard.isEmpty()) {
 			return null;
 		}
-		return waste.peek();
+		return discard.peek();
 	}
 	
+	public Move getDiscardMove() {
+		return new DiscardMove(getInstance());
+	}
 	
 	public boolean canDraw(Location source) {
 		if(source.equals(CardDeck.DECK)) {
 			if(!deck.isEmpty()) {
 				return true;
 			}
-		}
-		
+		}		
 		if(source.equals(CardDeck.DISCARD)) {
-			if(!waste.isEmpty()) {
+			if(!discard.isEmpty()) {
 				return true;
 			}
-		}
-		
+		}		
 		return false;
+	}
+	
+	public Card[] getStack(Workingstack index) {
+		Card[] cards = new Card[workingStackManager.getWorkingStack(index).size()];
+		for(int i=0; i<workingStackManager.getWorkingStack(index).size(); i++) {
+			cards[i] = workingStackManager.getWorkingStack(index).get(i);
+		}
+		return cards;
 	}
 }
