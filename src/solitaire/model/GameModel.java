@@ -16,6 +16,10 @@ public class GameModel {
 	private Stack<Card> waste;
 	private List<GameModelListener> listenerList = new ArrayList<>();
 	
+	public enum CardDeck implements Location{
+		DECK, DISCARD
+	}
+	
 	public static GameModel getInstance() {
 		return INSTANCE;
 	}
@@ -37,6 +41,7 @@ public class GameModel {
 	public void reset() {
 		deck.reset();
 		waste = new Stack<Card>();
+		notifyListener();
 	}
 
 	public boolean discard() {
@@ -53,5 +58,22 @@ public class GameModel {
 			return null;
 		}
 		return waste.peek();
+	}
+	
+	
+	public boolean canDraw(Location source) {
+		if(source.equals(CardDeck.DECK)) {
+			if(!deck.isEmpty()) {
+				return true;
+			}
+		}
+		
+		if(source.equals(CardDeck.DISCARD)) {
+			if(!waste.isEmpty()) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
