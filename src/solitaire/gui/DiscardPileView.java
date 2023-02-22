@@ -11,15 +11,15 @@ import solitaire.model.GameModelListener;
 public class DiscardPileView extends HBox implements GameModelListener{
 	
 	private static final int PADDING = 5;
-	//private CardDragHandler dragHandler;
+	private CardDragHandler dragHandler;
 	
 	public DiscardPileView() {
 		setPadding(new Insets(PADDING));
 		ImageView image = new ImageView(CardImages.getBack());
 		image.setVisible(false);
 		
-		//dragHandler = new CardDragHandler(image);
-		//image.setOnDragDetected(dragHandler);
+		dragHandler = new CardDragHandler(image);
+		image.setOnDragDetected(dragHandler);
 		
 		getChildren().add(image);
 		GameModel.getInstance().addListener(this);
@@ -34,7 +34,7 @@ public class DiscardPileView extends HBox implements GameModelListener{
 			Card topCard = GameModel.getInstance().peekDiscard();
 			ImageView image = (ImageView) this.getChildren().get(0);
 			image.setImage(CardImages.getImage(topCard));
-			//dragHandler.setCard(topCard);
+			dragHandler.setCard(topCard);
 		}
 	}
 }

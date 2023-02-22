@@ -4,6 +4,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import solitaire.card.Card;
 import solitaire.model.GameModel;
@@ -32,6 +34,8 @@ public class WorkingStackView extends StackPane{
 			getChildren().add(image);
 			System.out.println(index);
 			setOnDragOver(createDragOverHandler());
+			
+			
 		}
 	}
 	
@@ -45,6 +49,9 @@ public class WorkingStackView extends StackPane{
 				
 				Card  c = Card.get(event.getDragboard().getString());
 				System.out.println(c);
+				event.acceptTransferModes(TransferMode.MOVE);
+				event.consume();
+				
 			}
 		};
 	}
