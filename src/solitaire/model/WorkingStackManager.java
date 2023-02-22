@@ -5,7 +5,7 @@ import solitaire.card.Card;
 import solitaire.card.Deck;
 
 public class WorkingStackManager {
-	public enum Workingstack{
+	public enum Workingstack implements Location {
 		Stack1, Stack2, Stack3, Stack4, Stack5, Stack6, Stack7
 	}
 	
@@ -23,5 +23,9 @@ public class WorkingStackManager {
 			stack.push(card);
 		}
 		return stack;
+	}
+	
+	public void add(Card card, Workingstack index) {
+		workingStacks[index.ordinal()].push(card);
 	}
 }

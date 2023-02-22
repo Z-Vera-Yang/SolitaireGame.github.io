@@ -11,10 +11,11 @@ public class DiscardMove implements Move{
 	}
 
 	@Override
-	public void move() {
+	public boolean move() {
 		if(gameModel.discard()) {
 			
-		}		
+		}
+		return false;
 	}
 
 }

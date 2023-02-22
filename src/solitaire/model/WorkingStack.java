@@ -15,6 +15,10 @@ public class WorkingStack implements Iterable<Card>{
 			workingStack.add(deck.draw());
 		}
 	}
+	
+	public void push(Card card) {
+		workingStack.push(card);
+	}
 
 	@Override
 	public Iterator<Card> iterator() {
