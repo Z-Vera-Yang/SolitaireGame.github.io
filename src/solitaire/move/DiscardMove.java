@@ -2,19 +2,20 @@ package solitaire.move;
 
 import solitaire.model.GameModel;
 
-public class DeckMove implements Move{
+public class DiscardMove implements Move{
 	
 	GameModel gameModel;	
 
-	public DeckMove(GameModel gameModel) {
+	public DiscardMove(GameModel gameModel) {
 		this.gameModel = gameModel;
 	}
 
 	@Override
-	public void move() {
+	public boolean move() {
 		if(gameModel.discard()) {
 			
-		}		
+		}
+		return false;
 	}
 
 }
