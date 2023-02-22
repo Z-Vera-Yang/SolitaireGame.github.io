@@ -9,9 +9,10 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import solitaire.card.Card;
 import solitaire.model.GameModel;
+import solitaire.model.GameModelListener;
 import solitaire.model.WorkingStackManager.Workingstack;
 
-public class WorkingStackView extends StackPane{
+public class WorkingStackView extends StackPane implements GameModelListener {
 	
 	private static final int PADDING = 5;
 	private static final int Y_OFFSET =17;
@@ -22,6 +23,7 @@ public class WorkingStackView extends StackPane{
 		setPadding(new Insets(PADDING));
 		
 		buildLayout();
+		GameModel.getInstance().addListener(this);
 	}
 	
 	private void buildLayout() {
@@ -32,28 +34,41 @@ public class WorkingStackView extends StackPane{
 			image.setTranslateY(Y_OFFSET * offset);
 			offset++;
 			getChildren().add(image);
-			System.out.println(index);
+			
 			setOnDragOver(createDragOverHandler());
-			
-			
+			setOnDragDropped(createDragDroppedHandler());
 		}
 	}
 	
-	private EventHandler<DragEvent> createDragOverHandler(){
-		
-		return new EventHandler<DragEvent>() {
-			
+	private EventHandler<DragEvent> createDragOverHandler(){		
+		return new EventHandler<DragEvent>() {		
 			@Override
 			public void handle(DragEvent event) {
-				// TODO Auto-generated method stub
-				
-				Card  c = Card.get(event.getDragboard().getString());
-				System.out.println(c);
 				event.acceptTransferModes(TransferMode.MOVE);
-				event.consume();
-				
+				event.consume();				
 			}
 		};
+	}
+	
+	private EventHandler<DragEvent> createDragDroppedHandler() {
+		return new EventHandler<DragEvent>() {
+			@Override
+			public void handle(DragEvent event) {
+				Dragboard db = event.getDragboard();
+				boolean success = false;
+				if(db.hasString()) {
+					GameModel.getInstance().getCardMove(Card.get(db.getString()), index).move();
+					success = true;
+				}
+				event.setDropCompleted(success);
+			}
+			
+		};		
+	}
+
+	@Override
+	public void gameStateChanged() {
+		buildLayout();	
 	}
 
 }

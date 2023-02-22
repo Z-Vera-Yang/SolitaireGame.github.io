@@ -9,6 +9,7 @@ import solitaire.card.Deck;
 import solitaire.model.WorkingStackManager.Workingstack;
 import solitaire.move.DiscardMove;
 import solitaire.move.Move;
+import solitaire.move.OneCardMove;
 
 public class GameModel {
 	
@@ -88,5 +89,21 @@ public class GameModel {
 			cards[i] = workingStackManager.getWorkingStack(index).get(i);
 		}
 		return cards;
+	}
+	
+	public boolean move(Location source, Location destination) {
+		if(source.equals(CardDeck.DISCARD) && destination instanceof Workingstack) {
+			workingStackManager.add(discard.pop(), (Workingstack) destination);
+			notifyListener();
+			return true;
+		}
+		return false;
+	}
+	
+	public Move getCardMove(Card top, Location destination) {
+		if(top.equals(peekDiscard())) {
+			return new OneCardMove(CardDeck.DISCARD, destination, getInstance());
+		}
+		return null;
 	}
 }
