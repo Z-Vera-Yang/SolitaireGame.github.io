@@ -1,7 +1,9 @@
 package solitaire.gui;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.layout.StackPane;
 import solitaire.card.Card;
 import solitaire.model.GameModel;
@@ -29,8 +31,22 @@ public class WorkingStackView extends StackPane{
 			offset++;
 			getChildren().add(image);
 			System.out.println(index);
+			setOnDragOver(createDragOverHandler());
 		}
 	}
 	
+	private EventHandler<DragEvent> createDragOverHandler(){
+		
+		return new EventHandler<DragEvent>() {
+			
+			@Override
+			public void handle(DragEvent event) {
+				// TODO Auto-generated method stub
+				
+				Card  c = Card.get(event.getDragboard().getString());
+				System.out.println(c);
+			}
+		};
+	}
 
 }

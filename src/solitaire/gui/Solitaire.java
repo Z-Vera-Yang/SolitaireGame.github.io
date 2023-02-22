@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import solitaire.card.Suit;
+import solitaire.card.Card.Suit;
 import solitaire.model.SuitStackManager.SuitStack;
 import solitaire.model.WorkingStackManager.Workingstack;
 
