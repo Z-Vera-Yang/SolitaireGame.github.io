@@ -28,4 +28,18 @@ public class WorkingStackManager {
 	public void add(Card card, Workingstack index) {
 		workingStacks[index.ordinal()].push(card);
 	}
+	
+	public boolean canAdd(Card card, Workingstack index) {
+		assert card != null; 
+		if(workingStacks[index.ordinal()].isEmpty()) {
+			return true;
+		} else {
+			if(card.getSuit().ordinal() + workingStacks[index.ordinal()].peek().getSuit().ordinal() % 2 != 0) {
+				if(card.getRank().ordinal() == workingStacks[index.ordinal()].peek().getRank().ordinal() - 1) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

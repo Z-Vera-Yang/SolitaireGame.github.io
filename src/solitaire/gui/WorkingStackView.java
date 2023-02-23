@@ -44,7 +44,9 @@ public class WorkingStackView extends StackPane implements GameModelListener {
 		return new EventHandler<DragEvent>() {		
 			@Override
 			public void handle(DragEvent event) {
-				event.acceptTransferModes(TransferMode.MOVE);
+				if(GameModel.getInstance().canAdd(Card.get(event.getDragboard().getString()), index)) {
+					event.acceptTransferModes(TransferMode.MOVE);
+				}
 				event.consume();				
 			}
 		};
