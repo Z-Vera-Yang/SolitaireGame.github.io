@@ -106,4 +106,13 @@ public class GameModel {
 		}
 		return null;
 	}
+	
+	public boolean canAdd(Card top, Location destination) {
+		if(destination instanceof Workingstack) {
+			if(workingStackManager.canAdd(top, (Workingstack) destination)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
