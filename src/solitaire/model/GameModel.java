@@ -77,6 +77,11 @@ public class GameModel {
 	}
 	
 	public boolean canDraw(Location location) {
+		if(location instanceof Workingstack) {
+			if(workingStackManager.canDraw((Workingstack) location)) {
+				return true;
+			}
+		}
 		if(location instanceof SuitStack) {
 			if(suitStackManager.canDraw(location)) {
 				return true;
@@ -104,6 +109,13 @@ public class GameModel {
 	}
 	
 	public boolean move(Location source, Location destination) {
+		if(source instanceof Workingstack && destination instanceof SuitStack) {
+			if(canDraw(source) && suitStackManager.canAdd(workingStackManager.getCards((Workingstack) source).peek())) {
+				suitStackManager.add(workingStackManager.draw((Workingstack) source));
+				notifyListener();
+				return true;
+			}
+		}	
 		if(source.equals(CardDeck.DISCARD) && destination instanceof SuitStack) {
 			if(canDraw(source) && canAdd(discard.peek(), destination)) {
 				suitStackManager.add(discard.pop());
