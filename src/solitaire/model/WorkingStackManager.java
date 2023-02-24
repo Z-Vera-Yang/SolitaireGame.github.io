@@ -42,4 +42,17 @@ public class WorkingStackManager {
 		}
 		return false;
 	}
+	
+	public Card draw(Workingstack index) {
+		Card card = workingStacks[index.ordinal()].draw();
+		return card;
+	}
+	
+	public Stack<Card> getCards(Workingstack index) {
+		Stack<Card> stack = new Stack<>();
+		for(Card card : workingStacks[index.ordinal()]) {
+			stack.push(card);
+		}
+		return stack;
+	}
 }

@@ -97,12 +97,22 @@ public class GameModel {
 			notifyListener();
 			return true;
 		}
+		if(source instanceof Workingstack && destination instanceof Workingstack) {
+			workingStackManager.add(workingStackManager.draw((Workingstack) source), (Workingstack) destination);
+			notifyListener();
+			return true;
+		}
 		return false;
 	}
 	
 	public Move getCardMove(Card top, Location destination) {
 		if(top.equals(peekDiscard())) {
 			return new OneCardMove(CardDeck.DISCARD, destination, getInstance());
+		}
+		for(Workingstack ws : Workingstack.values()) {
+			if(!workingStackManager.getCards(ws).isEmpty() && workingStackManager.getCards(ws).peek().equals(top)) {
+				return new OneCardMove(ws, destination, getInstance());
+			}
 		}
 		return null;
 	}

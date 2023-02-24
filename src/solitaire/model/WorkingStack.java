@@ -28,6 +28,11 @@ public class WorkingStack implements Iterable<Card>{
 		assert !workingStack.isEmpty();
 		return workingStack.peek();
 	}
+	
+	public Card draw() {
+		assert !workingStack.isEmpty();
+		return workingStack.pop();
+	}
 
 	@Override
 	public Iterator<Card> iterator() {
