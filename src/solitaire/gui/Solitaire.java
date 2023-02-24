@@ -35,7 +35,7 @@ public class Solitaire extends Application{
 		root.add(deckView, 0, 0);
 		root.add(wasteView, 1, 0);
 		for(SuitStack index : SuitStack.values()) {
-			suitStacks[index.ordinal()] = new SuitStackView();
+			suitStacks[index.ordinal()] = new SuitStackView(index);
 			root.add(suitStacks[index.ordinal()], 3+index.ordinal(), 0);
 		}
 		for(Workingstack index : Workingstack.values()) {
