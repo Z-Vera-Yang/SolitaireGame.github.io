@@ -55,4 +55,11 @@ public class WorkingStackManager {
 		}
 		return stack;
 	}
+	
+	public boolean canDraw(Workingstack index) {
+		if(workingStacks[index.ordinal()].isEmpty()) {
+			return false;
+		}
+		return true;
+	}
 }
