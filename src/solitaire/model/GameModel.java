@@ -10,6 +10,7 @@ import solitaire.model.SuitStackManager.SuitStack;
 import solitaire.model.WorkingStackManager.Workingstack;
 import solitaire.move.DiscardMove;
 import solitaire.move.Move;
+import solitaire.move.MultipleCardsMove;
 import solitaire.move.OneCardMove;
 
 public class GameModel {
@@ -108,6 +109,15 @@ public class GameModel {
 		return cards;
 	}
 	
+	public boolean move(Location source, Location destination, Card card) {
+		if(canDraw(source) && canAdd(card, destination)) {
+			workingStackManager.addMultiple(workingStackManager.drawMutiple(card, (Workingstack) source), (Workingstack) destination);
+			notifyListener();
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean move(Location source, Location destination) {
 		if(source instanceof Workingstack && destination instanceof SuitStack) {
 			if(canDraw(source) && suitStackManager.canAdd(workingStackManager.getCards((Workingstack) source).peek())) {
@@ -143,6 +153,11 @@ public class GameModel {
 		for(Workingstack ws : Workingstack.values()) {
 			if(!workingStackManager.getCards(ws).isEmpty() && workingStackManager.getCards(ws).peek().equals(top)) {
 				return new OneCardMove(ws, destination, getInstance());
+			}
+			for(Card c : workingStackManager.getCards(ws)) {
+				if(c.equals(top)) {
+					return new MultipleCardsMove(ws, destination, c, getInstance());
+				}
 			}
 		}
 		return null;

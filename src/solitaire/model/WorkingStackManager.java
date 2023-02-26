@@ -62,4 +62,21 @@ public class WorkingStackManager {
 		}
 		return true;
 	}
+	
+	public void addMultiple(Stack<Card> stack, Workingstack index) {
+		assert canAdd(stack.lastElement(), index);
+		while(!stack.isEmpty()) {
+			workingStacks[index.ordinal()].push(stack.pop());
+		}
+	}
+	
+	public Stack<Card> drawMutiple(Card card, Workingstack index) {
+		assert canDraw(index);
+		Stack<Card> stack = new Stack<>();
+		while(card != workingStacks[index.ordinal()].peek()) {
+			stack.push(workingStacks[index.ordinal()].draw());
+		}
+		stack.push(workingStacks[index.ordinal()].draw());
+		return stack;
+	}
 }
