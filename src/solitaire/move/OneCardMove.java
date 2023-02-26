@@ -18,8 +18,16 @@ public class OneCardMove implements Move{
 	@Override
 	public boolean move() {
 		boolean success = gameModel.move(source, destination);
-		if(success) return true;
+		if(success) {
+			gameModel.logMove(this);
+			return true;
+		}
 		return false;
+	}
+
+	@Override
+	public boolean undo() {
+		return gameModel.undo(source, destination);
 	}
 
 }

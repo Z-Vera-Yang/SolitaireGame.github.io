@@ -1,10 +1,13 @@
 package solitaire.gui;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import solitaire.card.Card.Suit;
+import solitaire.model.GameModel;
 import solitaire.model.SuitStackManager.SuitStack;
 import solitaire.model.WorkingStackManager.Workingstack;
 
@@ -14,7 +17,7 @@ public class Solitaire extends Application{
 	private static final int HEIGHT = 531;
 	private static final String TITLE ="Solitaire";
 	private static final String VERSION ="1.0";
-	private static final String GROUP = "CST8334 Group 5";
+	private static final String GROUP = "CST8334 Group 14";
 	
 	private DeckView deckView = new DeckView();
 	private DiscardPileView wasteView = new DiscardPileView();
@@ -42,6 +45,15 @@ public class Solitaire extends Application{
 			stacks[index.ordinal()] = new WorkingStackView(index);
 			root.add(stacks[index.ordinal()], index.ordinal(), 1);
 		}
+		root.setOnKeyTyped(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if(event.getCharacter().equals("u")) {
+					GameModel.getInstance().undoLast();
+				}
+				event.consume();
+			}
+		});
 		
 		arg0.setResizable(false);
 		arg0.setScene(new Scene(root, WIDTH, HEIGHT));	
