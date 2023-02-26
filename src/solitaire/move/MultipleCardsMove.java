@@ -21,4 +21,8 @@ public class MultipleCardsMove implements Move{
 		if(success) return true;
 		return false;
 	}
+	@Override
+	public boolean undo() {
+		return false;
+	}
 }

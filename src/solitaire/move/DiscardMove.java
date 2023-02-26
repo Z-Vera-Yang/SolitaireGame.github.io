@@ -18,4 +18,9 @@ public class DiscardMove implements Move{
 		return false;
 	}
 
+	@Override
+	public boolean undo() {
+		return false;
+	}
+
 }

@@ -12,6 +12,7 @@ import solitaire.move.DiscardMove;
 import solitaire.move.Move;
 import solitaire.move.MultipleCardsMove;
 import solitaire.move.OneCardMove;
+import solitaire.move.UndoManager;
 
 public class GameModel {
 	
@@ -21,6 +22,7 @@ public class GameModel {
 	private List<GameModelListener> listenerList = new ArrayList<>();
 	private WorkingStackManager workingStackManager;
 	private SuitStackManager suitStackManager;
+	private UndoManager undoManager = new UndoManager(GameModel.getInstance());
 	
 	public enum CardDeck implements Location{
 		DECK, DISCARD
@@ -175,5 +177,21 @@ public class GameModel {
 			}
 		}
 		return false;
+	}
+	
+	public boolean undo(Location source, Location destination) {
+		if(source instanceof CardDeck && destination instanceof Workingstack) {
+			discard.push(workingStackManager.draw((Workingstack) destination));
+			notifyListener();
+			return true;
+		}
+		return false;
+	}
+	
+	public void logMove(Move move) {
+		undoManager.addMove(move);
+	}
+	public void undoLast() {
+		undoManager.undo();
 	}
 }
