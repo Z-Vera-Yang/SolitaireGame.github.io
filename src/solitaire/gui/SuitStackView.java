@@ -15,7 +15,7 @@ import solitaire.model.SuitStackManager.SuitStack;
 public class SuitStackView extends StackPane implements GameModelListener{
 	
 	private static final int PADDING = 5;
-	private static final String BORDER_STYLE = "-fx-border-color: lightgray; -fx-border-width: 3; -fx-border-radius: 10.0;";
+	private static final String BORDER_STYLE = "-fx-border-color: black; -fx-border-width: 1; -fx-border-radius: 10.0;";
 	private SuitStack index;
 	private CardDragHandler dragHandler;
 	

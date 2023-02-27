@@ -17,7 +17,7 @@ import solitaire.model.WorkingStackManager.Workingstack;
 public class WorkingStackView extends StackPane implements GameModelListener {
 	
 	private static final int PADDING = 5;
-	private static final int Y_OFFSET =17;
+	private static final int Y_OFFSET = 30;
 	private Workingstack index;
 
 	public WorkingStackView(Workingstack index) {
