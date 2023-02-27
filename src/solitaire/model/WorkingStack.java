@@ -19,6 +19,20 @@ public class WorkingStack implements Iterable<Card>{
 	public void push(Card card) {
 		workingStack.push(card);
 	}
+	
+	public boolean isEmpty() {
+		return workingStack.isEmpty();
+	}
+	
+	public Card peek() {
+		assert !workingStack.isEmpty();
+		return workingStack.peek();
+	}
+	
+	public Card draw() {
+		assert !workingStack.isEmpty();
+		return workingStack.pop();
+	}
 
 	@Override
 	public Iterator<Card> iterator() {
