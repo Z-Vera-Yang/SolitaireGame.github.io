@@ -24,7 +24,7 @@ public class DeckView extends HBox implements GameModelListener{
 	private static final int IMAGE_FONT_SIZE = 12;
 	
 	public DeckView() {
-		GameModel.getInstance().reset();
+		GameModel.getInstance().reset(true);
 		final Button button = new Button();
 		button.setGraphic(new ImageView(CardImages.getBack()));
 		button.setStyle(BUTTON_STYLE_NORMAL);
@@ -44,7 +44,7 @@ public class DeckView extends HBox implements GameModelListener{
 				((Button) event.getSource()).setStyle(BUTTON_STYLE_NORMAL);
 				
 				if(!GameModel.getInstance().canDraw(CardDeck.DECK)) {
-					GameModel.getInstance().reset();
+					GameModel.getInstance().reset(false);
 				}else {
 					GameModel.getInstance().getDiscardMove().move();
 				}	

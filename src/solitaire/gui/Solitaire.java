@@ -80,7 +80,7 @@ public class Solitaire extends Application{
         MenuItem shuffle = new MenuItem("Shuffle");
         //GameModel.getInstance().reset();
         shuffle.setOnAction((ActionEvent t) -> {
-        	GameModel.getInstance().reset();
+        	GameModel.getInstance().reset(true);
         });
 
      // --- MenuItem Exit   

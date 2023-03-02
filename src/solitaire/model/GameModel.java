@@ -46,22 +46,49 @@ public class GameModel {
 		}
 	}		
 	
-	public void reset() {
-		deck.reset();
-		deck.shuffle();
-		discard = new Stack<Card>();
-		workingStackManager = new WorkingStackManager(deck);
-		suitStackManager = new SuitStackManager();
-		notifyListener();
+	public void reset(Boolean resetGame) {
+		if(resetGame) {
+			deck.reset();
+			deck.shuffle();
+			discard = new Stack<Card>();
+			workingStackManager = new WorkingStackManager(deck);
+			suitStackManager = new SuitStackManager();
+			notifyListener();
+		} else {	
+			if (deck.isEmpty()) {
+				if (!discard.empty()) {
+					while (!discard.isEmpty()) {
+						deck.push(discard.pop()); // move cards back to the deck and flip them
+					}
+					notifyListener();
+				}
+			}		
+		}
+	}
+	
+	public void printDeckAndDiscardSize() {
+		System.out.println("deck size is "+ deck.size());
+		System.out.println("discard size is "+ discard.size());
 	}
 
 	public boolean discard() {
 		if(!this.deck.isEmpty()) {
-			discard.add(deck.draw());
+			discard.push(deck.draw());
 			notifyListener();
 			return true;
+		} else if (!discard.isEmpty()) {
+			// move all the cards from the discard pile back to the deck
+			while (!discard.isEmpty()) {
+				Card card = discard.pop();
+				card.flip(); // flip the card back over
+				deck.push(card);
+			}
+			deck.shuffle();
+			notifyListener();
+			return true;
+		} else {
+			return false;
 		}
-		return false;
 	}
 
 	public Card peekDiscard() {
