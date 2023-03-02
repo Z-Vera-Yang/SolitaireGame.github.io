@@ -5,6 +5,7 @@ public class Card {
 	private static Card[][] cards = new Card[Suit.values().length][Rank.values().length];
 	private Rank rank;
 	private Suit suit;
+	private boolean isFaceUp;
 	
 	public enum Rank{
 		ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING;
@@ -17,6 +18,7 @@ public class Card {
 	public Card( Rank rank,  Suit suit) {
 		this.rank = rank;
 		this.suit = suit;
+		this.isFaceUp = false;
 	}
 
 	public Rank getRank() {
@@ -26,6 +28,15 @@ public class Card {
 	public Suit getSuit() {
 		return suit;
 	}
+	
+	public boolean isFaceUp() {
+		return isFaceUp;
+	}
+	
+	public void flip() {
+		isFaceUp = !isFaceUp;
+	}
+	
 	public static Card getCard(Rank rank, Suit suit) {
 		if(cards[suit.ordinal()][rank.ordinal()] == null) {
 			cards[suit.ordinal()][rank.ordinal()] = new Card(rank, suit);
@@ -53,7 +64,11 @@ public class Card {
 	
 	@Override
 	public String toString() {
-		return  rank + " of " + suit;
+		if (isFaceUp) {
+			return  rank + " of " + suit;
+		} else {
+			return "card is face down";
+		}
 	}
 	
 	

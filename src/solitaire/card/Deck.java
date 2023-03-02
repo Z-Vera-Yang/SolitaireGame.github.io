@@ -14,13 +14,17 @@ public class Deck {
 		cards.clear();
 		for(Suit suit: Suit.values()) {
 			for(Rank rank: Rank.values()) {
-				cards.push(Card.flyWeightFactory(rank, suit));
+				cards.add(Card.flyWeightFactory(rank, suit));
 			}
 		}		
 	}
 	
 	public boolean isEmpty() {
 		return this.cards.isEmpty();
+	}
+	
+	public void push(Card card) {
+		cards.push(card);
 	}
 	
 	public Card draw() {
@@ -30,5 +34,9 @@ public class Deck {
 
 	public void shuffle() {
 		Collections.shuffle(cards);		
+	}
+	
+	public int size() {
+		return cards.size();
 	}
 }
