@@ -75,7 +75,7 @@ public class DeckView extends HBox implements GameModelListener{
 		context.setFont(Font.font(Font.getDefault().getName(), IMAGE_FONT_SIZE));
 		
 		context.fillText("deck empty", Math.round(width / 2), IMAGE_FONT_SIZE); // add wording when card deck is empty
-		context.setStroke(Color. DARKGRAY); // add icon when no card can show from deck
+		context.setStroke(Color. BLACK); // add icon when no card can show from deck
 		context.setLineWidth(10);
 		context.strokeOval(width / 4, height / 2 - width/4 + IMAGE_FONT_SIZE, width / 2, width / 2);
 		
