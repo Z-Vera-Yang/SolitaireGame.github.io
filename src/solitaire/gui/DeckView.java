@@ -69,13 +69,13 @@ public class DeckView extends HBox implements GameModelListener{
 		Canvas canvas = new Canvas(width, height);
 		GraphicsContext context = canvas.getGraphicsContext2D();
 		
-		// using context to set the look of what we need
+		// using context to set style when deck is empty
 		context.setTextAlign(TextAlignment.CENTER);
-		context.setFill(Color.DARKKHAKI);
+		context.setFill(Color.BLACK); // set color for wording 
 		context.setFont(Font.font(Font.getDefault().getName(), IMAGE_FONT_SIZE));
 		
-		context.fillText("Start again?", Math.round(width / 2), IMAGE_FONT_SIZE); // add wording when last card is showing
-		context.setStroke(Color. DARKGREEN); // add icon when no card can show from deck
+		context.fillText("deck empty", Math.round(width / 2), IMAGE_FONT_SIZE); // add wording when card deck is empty
+		context.setStroke(Color. DARKGRAY); // add icon when no card can show from deck
 		context.setLineWidth(10);
 		context.strokeOval(width / 4, height / 2 - width/4 + IMAGE_FONT_SIZE, width / 2, width / 2);
 		
