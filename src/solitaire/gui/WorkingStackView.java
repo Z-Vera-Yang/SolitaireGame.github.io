@@ -23,7 +23,6 @@ public class WorkingStackView extends StackPane implements GameModelListener {
 	public WorkingStackView(Workingstack index) {
 		this.index = index;
 		setPadding(new Insets(PADDING));
-		System.out.println("new Game");
 		buildLayout();
 		GameModel.getInstance().addListener(this);
 	}
