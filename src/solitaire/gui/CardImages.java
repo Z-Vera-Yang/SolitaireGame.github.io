@@ -17,6 +17,16 @@ public class CardImages {
 		return SUIT_CODES[card.getSuit().ordinal()] + RANK_CODES[card.getRank().ordinal()];
 	}
 	
+	public static Image getCurrentImage(Card card) {
+//		System.out.println("here now " + card.toString());
+		assert card != null;
+		if (card.isFaceUp()) {
+			return getImage(card);
+		} else {
+			return getBack();
+		}
+	}
+	
 	public static Image getImage(Card card) {
 		assert card != null;
 		return getImage(getCode(card));
