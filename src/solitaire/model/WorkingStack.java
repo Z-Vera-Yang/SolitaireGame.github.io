@@ -12,11 +12,7 @@ public class WorkingStack implements Iterable<Card>{
 	
 	public WorkingStack(Deck deck, int num) {
 		for(int i=0; i<num; i++) {
-			Card curr = deck.draw();
-			if (curr.isFaceUp()) {
-				curr.flip();
-			}
-			workingStack.add(curr);
+			workingStack.add(deck.draw());
 		}
 	}
 	

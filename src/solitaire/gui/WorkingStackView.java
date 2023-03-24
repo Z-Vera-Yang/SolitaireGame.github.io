@@ -23,6 +23,7 @@ public class WorkingStackView extends StackPane implements GameModelListener {
 	public WorkingStackView(Workingstack index) {
 		this.index = index;
 		setPadding(new Insets(PADDING));
+		
 		buildLayout();
 		GameModel.getInstance().addListener(this);
 	}
@@ -31,11 +32,8 @@ public class WorkingStackView extends StackPane implements GameModelListener {
 		getChildren().clear();
 		int offset = 0;
 		Card[] stack = GameModel.getInstance().getStack(index);
-		if (stack.length >0 && !stack[stack.length-1].isFaceUp()) {
-			stack[stack.length-1].flip();
-		}
 		for(Card card : stack) {
-			ImageView image = new ImageView(CardImages.getCurrentImage(card));
+			final ImageView image = new ImageView(CardImages.getImage(card));
 			image.setTranslateY(Y_OFFSET * offset);
 			offset++;
 			getChildren().add(image);
@@ -90,7 +88,7 @@ public class WorkingStackView extends StackPane implements GameModelListener {
 
 	@Override
 	public void gameStateChanged() {
-		buildLayout();
+		buildLayout();	
 	}
 
 }
