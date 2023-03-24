@@ -31,6 +31,7 @@ public class WorkingStackManager {
 	
 	public boolean canAdd(Card card, Workingstack index) {
 		assert card != null; 
+		// only King cards can be moved to an empty working stack
 		if(workingStacks[index.ordinal()].isEmpty()) {
 			if(card.getRank().ordinal() == 12) {
 				return true;
