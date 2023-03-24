@@ -32,7 +32,9 @@ public class WorkingStackManager {
 	public boolean canAdd(Card card, Workingstack index) {
 		assert card != null; 
 		if(workingStacks[index.ordinal()].isEmpty()) {
-			return true;
+			if(card.getRank().ordinal() == 12) {
+				return true;
+			}			
 		} else {
 			// rules for moving card to working stack
 			if((card.getSuit().ordinal() + workingStacks[index.ordinal()].peek().getSuit().ordinal()) % 2 != 0) {
