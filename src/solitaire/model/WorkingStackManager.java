@@ -34,7 +34,8 @@ public class WorkingStackManager {
 		if(workingStacks[index.ordinal()].isEmpty()) {
 			return true;
 		} else {
-			if(card.getSuit().ordinal() + workingStacks[index.ordinal()].peek().getSuit().ordinal() % 2 != 0) {
+			// rules for moving card to working stack
+			if((card.getSuit().ordinal() + workingStacks[index.ordinal()].peek().getSuit().ordinal()) % 2 != 0) {
 				if(card.getRank().ordinal() == workingStacks[index.ordinal()].peek().getRank().ordinal() - 1) {
 					return true;
 				}
