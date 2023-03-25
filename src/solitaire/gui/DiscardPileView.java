@@ -33,7 +33,7 @@ public class DiscardPileView extends HBox implements GameModelListener{
 			getChildren().get(0).setVisible(true);
 			Card topCard = GameModel.getInstance().peekDiscard();
 			ImageView image = (ImageView) this.getChildren().get(0);
-			image.setImage(CardImages.getImage(topCard));
+			image.setImage(CardImages.getCurrentImage(topCard));
 			dragHandler.setCard(topCard);
 		}
 	}
