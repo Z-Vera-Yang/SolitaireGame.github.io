@@ -13,7 +13,6 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -30,14 +29,11 @@ public class Solitaire extends Application{
 	private static final String TITLE ="Solitaire";
 	private static final String VERSION ="1.0";
 	private static final String GROUP = "CST8334 Group 14";
-	
-	private DraggableMaker dragMaker = new DraggableMaker();
 	private DeckView deckView = new DeckView();
 	private DiscardPileView wasteView = new DiscardPileView();
 	private SuitStackView[] suitStacks = new SuitStackView[Suit.values().length];
 	private WorkingStackView[] stacks = new WorkingStackView[Workingstack.values().length];
 	Point2D dragDistance = null;
-	private ImageView imageView;
 
 	public static void main(String[] args) {
 		launch(args);
