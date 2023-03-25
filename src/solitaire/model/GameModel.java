@@ -48,7 +48,6 @@ public class GameModel {
 	
 	public void reset(Boolean resetGame) {
 		if(resetGame) {
-			System.out.println(deck.size());
 			deck.reset();
 			deck.shuffle();
 			discard = new Stack<Card>();
