@@ -58,7 +58,9 @@ public class GameModel {
 			if (deck.isEmpty()) {
 				if (!discard.empty()) {
 					while (!discard.isEmpty()) {
-						deck.push(discard.pop()); // move cards back to the deck and flip them
+						Card card = discard.pop();
+						card.flip(); // flip the card back over
+						deck.push(card); // move cards back to the deck and flip them
 					}
 					notifyListener();
 				}
@@ -73,7 +75,9 @@ public class GameModel {
 
 	public boolean discard() {
 		if(!this.deck.isEmpty()) {
-			discard.push(deck.draw());
+			Card card = deck.draw();
+			card.flip();  // flip card when discard
+			discard.push(card);
 			notifyListener();
 			return true;
 		} else if (!discard.isEmpty()) {

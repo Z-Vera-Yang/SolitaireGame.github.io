@@ -14,7 +14,12 @@ public class Deck {
 		cards.clear();
 		for(Suit suit: Suit.values()) {
 			for(Rank rank: Rank.values()) {
-				cards.add(Card.flyWeightFactory(rank, suit));
+				Card card = Card.flyWeightFactory(rank, suit);
+//				if card is faced up, flip it back
+				if (card.isFaceUp()) {
+					card.flip();
+				}
+				cards.add(card);
 			}
 		}		
 	}
