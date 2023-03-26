@@ -3,6 +3,7 @@ package solitaire.gui;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -10,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import solitaire.card.Card;
+import solitaire.card.TempCard;
 import solitaire.model.GameModel;
 import solitaire.model.GameModelListener;
 import solitaire.model.WorkingStackManager.Workingstack;
@@ -19,11 +21,10 @@ public class WorkingStackView extends StackPane implements GameModelListener {
 	private static final int PADDING = 5;
 	private static final int Y_OFFSET = 30;
 	private Workingstack index;
-
+	
 	public WorkingStackView(Workingstack index) {
 		this.index = index;
 		setPadding(new Insets(PADDING));
-		
 		buildLayout();
 		GameModel.getInstance().addListener(this);
 	}
@@ -40,7 +41,6 @@ public class WorkingStackView extends StackPane implements GameModelListener {
 			
 			setOnDragOver(createDragOverHandler());
 			setOnDragDropped(createDragDroppedHandler());
-			
 			image.setOnDragDetected(createDragDetectedHandler(image,card));
 		}
 	}
@@ -50,6 +50,13 @@ public class WorkingStackView extends StackPane implements GameModelListener {
 			@Override
 			public void handle(MouseEvent event) {
 				Dragboard db = imageView.startDragAndDrop(TransferMode.ANY);
+				WritableImage wi = new WritableImage(105, 150);
+				imageView.snapshot(null, wi);
+				double centerX = CardImages.getBack().getWidth() / 2;
+				double centerY = CardImages.getBack().getWidth() / 2;
+				db.setDragViewOffsetX(centerX);
+	            db.setDragViewOffsetY(centerY);
+				db.setDragView(wi);
 				ClipboardContent cc = new ClipboardContent();
 				cc.putString(card.getIDString());
 				db.setContent(cc);
