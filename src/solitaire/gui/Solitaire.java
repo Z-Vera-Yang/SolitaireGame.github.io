@@ -105,7 +105,7 @@ public class Solitaire extends Application{
 				 * Implement dialog to be prompted when players asks for
 				 * details.
 				 */
-				System.out.println("print Solitaire help information");
+//				System.out.println("print Solitaire help information");
 				
 			      Dialog<String> dialog = new Dialog<String>();
 			      dialog.setTitle("Help");

@@ -34,7 +34,7 @@ public class DeckView extends HBox implements GameModelListener{
 			@Override
 			public void handle(MouseEvent event) {
 				((Button) event.getSource()).setStyle(BUTTON_STYLE_PRESSED);
-				System.out.println("mouse pressed!");
+//				System.out.println("mouse pressed!");
 			}
 		});
 		
