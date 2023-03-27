@@ -69,7 +69,7 @@ public class SuitStackView extends StackPane implements GameModelListener{
 			getChildren().get(0).setVisible(true);
 			Card topCard = GameModel.getInstance().peekSuitStack(index);
 			ImageView image = (ImageView) getChildren().get(0);
-			image.setImage(CardImages.getImage(topCard));
+			image.setImage(CardImages.getCurrentImage(topCard));
 			dragHandler.setCard(topCard);
 		}		
 	}

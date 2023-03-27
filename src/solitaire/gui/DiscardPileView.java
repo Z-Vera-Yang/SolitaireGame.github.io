@@ -57,12 +57,14 @@ public class DiscardPileView extends HBox implements GameModelListener{
 			Node node = getChildren().get(0);
 //			System.out.println(node);
 			Card topCard = GameModel.getInstance().peekDiscard();
+
 			image2 = (ImageView) this.getChildren().get(0);
-			image2.setImage(CardImages.getImage(topCard));
+			image2.setImage(CardImages.getCurrentImage(topCard));
 			tempCard.setCard(topCard);
 //			TempCard tempCard = new TempCard(CardImages.getImage(topCard));
 //   		tempCard.setStyle("-fx-background-color: rgba(255, 255, 255, 0.5);");
 //			
+
 		}
 	}
 }

@@ -31,10 +31,14 @@ public class WorkingStackManager {
 	
 	public boolean canAdd(Card card, Workingstack index) {
 		assert card != null; 
+		// only King cards can be moved to an empty working stack
 		if(workingStacks[index.ordinal()].isEmpty()) {
-			return true;
+			if(card.getRank().ordinal() == 12) {
+				return true;
+			}			
 		} else {
-			if(card.getSuit().ordinal() + workingStacks[index.ordinal()].peek().getSuit().ordinal() % 2 != 0) {
+			// rules for moving card to working stack
+			if((card.getSuit().ordinal() + workingStacks[index.ordinal()].peek().getSuit().ordinal()) % 2 != 0) {
 				if(card.getRank().ordinal() == workingStacks[index.ordinal()].peek().getRank().ordinal() - 1) {
 					return true;
 				}
