@@ -2,8 +2,10 @@ package solitaire.gui;
 
 import javafx.application.Application;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -23,15 +25,15 @@ public class Solitaire extends Application{
 	
 	// set size of the game window and title 
 	private static final int WIDTH = 850;
-	private static final int HEIGHT = 850;
+	private static final int HEIGHT = 620;
 	private static final String TITLE ="Solitaire";
 	private static final String VERSION ="1.0";
 	private static final String GROUP = "CST8334 Group 14";
-	
 	private DeckView deckView = new DeckView();
 	private DiscardPileView wasteView = new DiscardPileView();
 	private SuitStackView[] suitStacks = new SuitStackView[Suit.values().length];
 	private WorkingStackView[] stacks = new WorkingStackView[Workingstack.values().length];
+	Point2D dragDistance = null;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -75,6 +77,7 @@ public class Solitaire extends Application{
     			gridPane.add(stacks[index.ordinal()], index.ordinal(), 1);
     		}
     		 start.setDisable(true);
+    		 
         });
 
      // --- MenuItem Shuffle        
@@ -102,7 +105,7 @@ public class Solitaire extends Application{
 				 * Implement dialog to be prompted when players asks for
 				 * details.
 				 */
-				System.out.println("print Solitaire help information");
+//				System.out.println("print Solitaire help information");
 				
 			      Dialog<String> dialog = new Dialog<String>();
 			      dialog.setTitle("Help");
@@ -121,6 +124,7 @@ public class Solitaire extends Application{
         root.setCenter(gridPane);
 
         Scene scene = new Scene(root, WIDTH, HEIGHT);
+		
 		arg0.setScene(scene);
 		arg0.show();
 	}

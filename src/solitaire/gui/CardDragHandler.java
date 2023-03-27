@@ -1,6 +1,7 @@
 package solitaire.gui;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -12,7 +13,12 @@ public class CardDragHandler implements EventHandler<MouseEvent>{
 	
 	private Card card;
 	private ImageView view;
+	
+	 public ImageView getView() {
+		return view;
+	}
 
+    
 	CardDragHandler(ImageView view)
 	{
 		this.view = view;
@@ -21,6 +27,7 @@ public class CardDragHandler implements EventHandler<MouseEvent>{
 	void setCard(Card card)
 	{
 		this.card = card;
+		
 	}
 
 	@Override
@@ -30,6 +37,8 @@ public class CardDragHandler implements EventHandler<MouseEvent>{
 		ClipboardContent clipContent = new ClipboardContent();
 		clipContent.putString(card.getIDString());
 		dragBoard.setContent(clipContent);
+		
+		
 		event.consume();
 		
 	}
