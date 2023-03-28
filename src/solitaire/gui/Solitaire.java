@@ -19,6 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import solitaire.card.Card.Suit;
 import solitaire.model.GameModel;
+import solitaire.model.Score;
 import solitaire.model.SuitStackManager.SuitStack;
 import solitaire.model.WorkingStackManager.Workingstack;
 
@@ -34,7 +35,8 @@ public class Solitaire extends Application{
 	private DiscardPileView wasteView = new DiscardPileView();
 	private SuitStackView[] suitStacks = new SuitStackView[Suit.values().length];
 	private WorkingStackView[] stacks = new WorkingStackView[Workingstack.values().length];
-	Point2D dragDistance = null;
+	private Point2D dragDistance = null;
+	private ScorePane scorePane = null;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -66,12 +68,18 @@ public class Solitaire extends Application{
 		 // --- Menu Game
         Menu menuGame = new Menu("Game");
         MenuItem start = new MenuItem("Start");
-        Label placeHolder = new Label();
-        placeHolder.setPrefSize(0, 0); 
+        
+        double width = CardImages.getBack().getWidth();
+		double height = CardImages.getBack().getHeight();
+		
+		scorePane = ScorePane.getInstance();
+		scorePane.setPrefWidth(width);// prefWidth for score pane with the size of card
+		scorePane.setPrefHeight(height);// prefHeight for score pane fitting the size of card
+		
         start.setOnAction((ActionEvent t) -> {
         	gridPane.add(deckView, 0, 0);
         	gridPane.add(wasteView, 1, 0);
-        	gridPane.add(placeHolder, 2, 0);
+        	gridPane.add(scorePane, 2, 0);
     		for(SuitStack index : SuitStack.values()) {
     			suitStacks[index.ordinal()] = new SuitStackView(index);
     			gridPane.add(suitStacks[index.ordinal()], 3+index.ordinal(), 0);
