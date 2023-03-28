@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -65,9 +66,12 @@ public class Solitaire extends Application{
 		 // --- Menu Game
         Menu menuGame = new Menu("Game");
         MenuItem start = new MenuItem("Start");
+        Label placeHolder = new Label();
+        placeHolder.setPrefSize(0, 0); 
         start.setOnAction((ActionEvent t) -> {
         	gridPane.add(deckView, 0, 0);
         	gridPane.add(wasteView, 1, 0);
+        	gridPane.add(placeHolder, 2, 0);
     		for(SuitStack index : SuitStack.values()) {
     			suitStacks[index.ordinal()] = new SuitStackView(index);
     			gridPane.add(suitStacks[index.ordinal()], 3+index.ordinal(), 0);
