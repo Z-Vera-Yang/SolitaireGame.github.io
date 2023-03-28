@@ -73,7 +73,7 @@ public class Solitaire extends Application{
 		double height = CardImages.getBack().getHeight();
 		
 		scorePane = ScorePane.getInstance();
-		scorePane.setPrefWidth(width);// prefWidth for score pane with the size of card
+		scorePane.setPrefWidth(width+10);// prefWidth for score pane with the size of card
 		scorePane.setPrefHeight(height);// prefHeight for score pane fitting the size of card
 		
         start.setOnAction((ActionEvent t) -> {
