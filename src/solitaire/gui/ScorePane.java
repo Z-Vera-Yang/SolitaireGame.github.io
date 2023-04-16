@@ -10,19 +10,31 @@ public class ScorePane extends VBox {
     private static Score score;
     private Label currentScoreLabel;
     private Label highScoreLabel;
-    private static final ScorePane INSTANCE = new ScorePane();
-    public ScorePane() {
+    private static  ScorePane INSTANCE;
+    
+    public static Timer timer;
+    private TimerLabel timerLabel;
+    
+    private ScorePane() {
         score = new Score();
         currentScoreLabel = new Label();
         highScoreLabel = new Label();
         currentScoreLabel.textProperty().bind(score.currentScoreProperty().asString("Current score: %d"));
         highScoreLabel.textProperty().bind(score.highScoreProperty().asString("High score: %d"));
-        getChildren().addAll(currentScoreLabel, highScoreLabel);
+        
+        timer = new Timer();
+        timerLabel = new TimerLabel(timer);
+        
+        getChildren().addAll(currentScoreLabel, highScoreLabel, timerLabel);
+        timer.start();
         setPadding(new Insets(2));
         setSpacing(2);
     }
     
-    public static ScorePane getInstance() {
+    public static synchronized ScorePane getInstance() {
+    	if(INSTANCE == null) {
+    		INSTANCE = new ScorePane();
+    	}
 		return INSTANCE;
 	}
     

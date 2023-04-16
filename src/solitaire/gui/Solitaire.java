@@ -37,6 +37,10 @@ public class Solitaire extends Application{
 	private WorkingStackView[] stacks = new WorkingStackView[Workingstack.values().length];
 	private Point2D dragDistance = null;
 	private ScorePane scorePane = null;
+	
+
+    private Timer timer;
+    private TimerLabel timerLabel;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -49,11 +53,14 @@ public class Solitaire extends Application{
 		BorderPane root = new BorderPane();
 		GridPane gridPane = new GridPane();
 		
+		
+		
 		gridPane.setOnKeyTyped(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
 				if(event.getCharacter().equals("u")) {
 					GameModel.getInstance().undoLast();
+					ScorePane.getInstance().addPoints(-15);
 				}
 				event.consume();
 			}
@@ -97,6 +104,7 @@ public class Solitaire extends Application{
         //GameModel.getInstance().reset();
         shuffle.setOnAction((ActionEvent t) -> {
         	GameModel.getInstance().reset(true);
+        	ScorePane.getInstance().timer.reset();
         });
 
      // --- MenuItem Exit   

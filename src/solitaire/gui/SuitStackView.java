@@ -53,7 +53,7 @@ public class SuitStackView extends StackPane implements GameModelListener{
 				boolean success = false;
 				if(db.hasString()) {
 					GameModel.getInstance().getCardMove(Card.get(db.getString()), index).move();
-					ScorePane.getInstance().addPoints(1);
+					ScorePane.getInstance().addPoints(10);
 					success = true;
 				}
 				event.setDropCompleted(success);
